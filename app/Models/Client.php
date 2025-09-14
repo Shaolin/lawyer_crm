@@ -16,10 +16,16 @@ class Client extends Model
         'phone',
         'address',
         'notes',
+        'user_id',
     ];
 
     public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); // 👈 add this
     }
 }

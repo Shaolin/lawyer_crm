@@ -22,20 +22,29 @@ class ClientController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
-            'notes' => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'nullable|email',
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+        'notes' => 'nullable|string',
+    ]);
 
-        $organization = Auth::user()->organization;
-        $organization->clients()->create($request->all());
+    $organization = Auth::user()->organization;
 
-        return redirect()->route('dashboard.clients.index')->with('success', 'Client added successfully.');
-    }
+    $organization->clients()->create([
+        'user_id' => Auth::id(), // 👈 ensures the lawyer/admin is linked
+        'name' => $request->name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'notes' => $request->notes,
+    ]);
+
+    return redirect()->route('dashboard.clients.index')->with('success', 'Client added successfully.');
+}
+
     public function edit(Client $client)
 {
     $this->authorize('view', $client); // optional if using policies
