@@ -21,6 +21,11 @@
                class="{{ request()->routeIs('contact.show') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
                Contact
             </a>
+            <a href="{{ route('pricing') }}" 
+   class="{{ request()->routeIs('pricing') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
+   Pricing
+</a>
+
         </div>
 
         <!-- Auth Buttons (Desktop) -->
@@ -75,6 +80,11 @@
            class="{{ request()->routeIs('contact.show') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
            Contact
         </a>
+        <a href="{{ route('pricing') }}" 
+   class="{{ request()->routeIs('pricing') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
+   Pricing
+</a>
+
 
         @auth
             <a href="{{ route('dashboard') }}" 

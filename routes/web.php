@@ -8,6 +8,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LegalCaseController;
 use App\Http\Controllers\UserManagementController;
@@ -91,8 +92,13 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact.show')
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 
+Route::view('/pricing', 'pricing')->name('pricing');
 
 
+
+
+// Route::get('/pay', [PaymentsController::class, 'redirectToGateway'])->name('pay');
+// Route::get('/payment/callback', [PaymentsController::class, 'handleGatewayCallback']);
 
 
 

@@ -36,6 +36,13 @@
                     Invoices
                 </a>
 
+                <form method="GET" action="{{ route('pay') }}">
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg">
+                        Pay ₦5000 with Paystack
+                    </button>
+                </form>
+                
+
                 <!-- Users link (only visible to admin) -->
                 @if(Auth::user()->role === 'admin')
                     <a href="{{ route('dashboard.users.index') }}"
