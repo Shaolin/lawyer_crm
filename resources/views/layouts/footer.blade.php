@@ -13,8 +13,9 @@
         <div>
             <h3 class="text-white text-lg font-bold">Quick Links</h3>
             <ul class="mt-2 space-y-2 text-sm">
-                <li><a href="#features" class="hover:text-white">Features</a></li>
-                <li><a href="#why" class="hover:text-white">Why Choose Us</a></li>
+                <li><a href="{{ route('features') }}" class="hover:text-white">Features</a></li>
+                <li><a href="{{ url('whyus') }}" class="hover:text-white">Why Choose Us</a></li>
+                <li><a href="{{ route('contact.show') }}" class="hover:text-white">Contact Us</a></li>
                 <li><a href="{{ route('login') }}" class="hover:text-white">Login</a></li>
                 <li><a href="{{ route('register') }}" class="hover:text-white">Sign Up</a></li>
             </ul>

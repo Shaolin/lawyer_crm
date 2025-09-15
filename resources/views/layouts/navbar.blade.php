@@ -1,4 +1,4 @@
-<nav class="bg-white shadow fixed w-full top-0 z-50">
+<nav x-data="{ open: false }" class="bg-white shadow fixed w-full top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <!-- Logo -->
         <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-700">Crystal CRM</a>
@@ -13,13 +13,17 @@
                class="{{ request()->routeIs('features') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
                Features
             </a>
-            <a href="{{ url('whyus') }}" 
-               class="{{ request()->is('#why') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
+            <a href="{{ url('/#why') }}" 
+               class="text-gray-700 hover:text-indigo-700">
                Why Us
+            </a>
+            <a href="{{ route('contact.show') }}" 
+               class="{{ request()->routeIs('contact.show') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
+               Contact
             </a>
         </div>
 
-        <!-- Auth Buttons -->
+        <!-- Auth Buttons (Desktop) -->
         <div class="hidden md:flex space-x-4">
             @auth
                 <a href="{{ route('dashboard') }}" 
@@ -46,14 +50,15 @@
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                ☰
+            <button @click="open = !open" class="text-gray-700 focus:outline-none">
+                <span x-show="!open">☰</span>
+                <span x-show="open">✖</span>
             </button>
         </div>
     </div>
 
     <!-- Mobile Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+    <div x-show="open" x-transition class="md:hidden px-6 pb-4 space-y-2">
         <a href="{{ url('/') }}" 
            class="{{ request()->is('/') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
            Home
@@ -65,6 +70,10 @@
         <a href="{{ url('/#why') }}" 
            class="text-gray-700 hover:text-indigo-700">
            Why Us
+        </a>
+        <a href="{{ route('contact.show') }}" 
+           class="{{ request()->routeIs('contact.show') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
+           Contact
         </a>
 
         @auth
@@ -87,7 +96,9 @@
             </a>
         @endauth
     </div>
+    <script src="//unpkg.com/alpinejs" defer></script>
+
 </nav>
 
-<!-- Spacer so content doesn't hide behind fixed navbar -->
+<!-- Spacer -->
 <div class="h-20"></div>
