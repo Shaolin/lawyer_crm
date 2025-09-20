@@ -59,6 +59,7 @@
                 <p class="mt-4 text-gray-600 leading-relaxed">
                     📍 Enugu, Nigeria <br>
                     📞 +234 7030920009 <br>
+                    📞 +234 7045693525 <br>
                     📧 support@crystalcrm.com
                 </p>
 

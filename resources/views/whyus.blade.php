@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Features — Crystal CRM</title>
+    <title>Why Us — Crystal CRM for Lawyers</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
