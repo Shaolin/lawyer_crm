@@ -1,11 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100">
                 {{ __('Clients') }}
             </h2>
-            <a href="{{ route('dashboard.clients.create') }}"
-               class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700">
+            <a href="{{ route('dashboard.clients.create') }}" class="btn-primary">
                 + Add Client
             </a>
         </div>
@@ -13,50 +12,67 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm sm:rounded-lg overflow-hidden">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Phone</th>
-                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($clients as $client)
-                            <tr>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $client->name }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ $client->email }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ $client->phone }}</td>
-                                <td class="px-6 py-4 text-right text-sm space-x-3">
-                                    <!-- Edit -->
-                                    <a href="{{ route('dashboard.clients.edit', $client) }}"
-                                       class="text-indigo-600 hover:text-indigo-900">Edit</a>
+            <!-- Reusable Table Component -->
+            <x-table>
+                <!-- Table Head -->
+                <x-slot name="head">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                            Name
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                            Email
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                            Phone
+                        </th>
+                        <th class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
+                            Actions
+                        </th>
+                    </tr>
+                </x-slot>
 
-                                    <!-- Delete -->
-                                    <form action="{{ route('dashboard.clients.destroy', $client) }}"
-                                          method="POST"
-                                          class="inline-block"
-                                          onsubmit="return confirm('Are you sure you want to delete this client?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                                    No clients found.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                <!-- Table Body -->
+                <x-slot name="body">
+                    @forelse($clients as $client)
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                {{ $client->name }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                {{ $client->email }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                {{ $client->phone }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-4">
+                                <a href="{{ route('dashboard.clients.edit', $client) }}"
+                                   class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                                    Edit
+                                </a>
+                                <form action="{{ route('dashboard.clients.destroy', $client) }}"
+                                      method="POST"
+                                      class="inline-block"
+                                      onsubmit="return confirm('Delete this client?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="text-red-600 dark:text-red-400 hover:underline">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4"
+                                class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                                No clients found.
+                            </td>
+                        </tr>
+                    @endforelse
+                </x-slot>
+            </x-table>
         </div>
     </div>
 </x-app-layout>

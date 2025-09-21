@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-gray-200">
                 {{ __('Task Details') }}
             </h2>
             <a href="{{ route('dashboard.tasks.index') }}"
-               class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+               class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
                 Back to Tasks
             </a>
         </div>
@@ -13,46 +13,55 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm sm:rounded-lg p-6 space-y-6">
+            <!-- Card -->
+            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6 space-y-6">
+
                 <!-- Title -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Title</h3>
-                    <p class="text-gray-700">{{ $task->title }}</p>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Title</h3>
+                    <p class="text-gray-700 dark:text-gray-300">{{ $task->title }}</p>
                 </div>
 
                 <!-- Description -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Description</h3>
-                    <p class="text-gray-700">{{ $task->description ?? 'No description provided.' }}</p>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Description</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {{ $task->description ?? 'No description provided.' }}
+                    </p>
                 </div>
 
-                <!-- Case -->
+                <!-- Related Case -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Related Case</h3>
-                    <p class="text-gray-700">{{ $task->legalCase->title ?? 'N/A' }}</p>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Related Case</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {{ $task->legalCase->title ?? 'N/A' }}
+                    </p>
                 </div>
 
                 <!-- Assigned Lawyer -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Assigned Lawyer</h3>
-                    <p class="text-gray-700">{{ $task->user->name ?? 'N/A' }}</p>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Assigned Lawyer</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {{ $task->user->name ?? 'N/A' }}
+                    </p>
                 </div>
 
                 <!-- Due Date -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Due Date</h3>
-                    <p class="text-gray-700">{{ $task->due_date ? $task->due_date->format('M d, Y') : 'Not set' }}</p>
-                    
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Due Date</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {{ $task->due_date ? $task->due_date->format('M d, Y') : 'Not set' }}
+                    </p>
                 </div>
 
                 <!-- Status -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Status</h3>
-                    <p class="text-gray-700 capitalize">{{ $task->status }}</p>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Status</h3>
+                    <p class="text-gray-700 dark:text-gray-300 capitalize">{{ $task->status }}</p>
                 </div>
 
                 <!-- Actions -->
-                <div class="flex items-center justify-end gap-4">
+                <div class="flex items-center justify-end gap-4 pt-4">
                     <a href="{{ route('dashboard.tasks.edit', $task) }}"
                        class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
                         Edit Task
@@ -67,6 +76,7 @@
                         </button>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

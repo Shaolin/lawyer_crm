@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Invoice {{ $invoice->invoice_number }}</title>
     <style>
-        body { font-family: Arial, sans-serif; font-size: 14px; color: #333; margin: 0; padding: 20px; }
+        body { font-family: DejaVu Sans, sans-serif; font-size: 14px; color: #333; margin: 0; padding: 20px; }
         h1, h2, h3, h4, h5 { margin: 0; padding: 0; }
         h1 { font-size: 24px; margin-bottom: 10px; }
         h2 { font-size: 20px; margin-bottom: 8px; }
@@ -59,8 +59,8 @@
                 <tr>
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>₦{{ number_format($item->unit_price, 2) }}</td>
-                    <td>₦{{ number_format($item->total, 2) }}</td>
+                    <td>&#8358;{{ number_format($item->unit_price, 2) }}</td>
+                    <td>&#8358;{{ number_format($item->total, 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -68,7 +68,7 @@
     </div>
 
     <div class="mt-4 text-right">
-        <h3>Total Amount: ₦{{ number_format($invoice->total_amount, 2) }}</h3>
+        <h3>Total Amount: &#8358;{{ number_format($invoice->total_amount, 2) }}</h3>
     </div>
 
 </body>

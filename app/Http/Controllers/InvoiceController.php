@@ -120,6 +120,17 @@ class InvoiceController extends Controller
             ->with('success', 'Invoice deleted successfully.');
     }
     
+    public function download(Invoice $invoice)
+    {
+        $this->authorize('view', $invoice);
+
+        $invoice->load('client', 'items', 'payments');
+
+        $pdf = Pdf::loadView('dashboard.invoices.pdf', compact('invoice'))
+                  ->setPaper('a4');
+
+        return $pdf->download($invoice->invoice_number . '.pdf');
+    }
 
 
 
