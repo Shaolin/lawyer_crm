@@ -21,6 +21,12 @@ class ClientController extends Controller
         return view('dashboard.clients.create');
     }
 
+    public function show(Client $client)
+{
+    return view('dashboard.clients.show', compact('client'));
+}
+
+
     public function store(Request $request)
 {
     $request->validate([

@@ -46,6 +46,10 @@
                                 {{ $client->phone }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-4">
+                                <a href="{{ route('dashboard.clients.show', $client) }}"
+                                   class="text-blue-600 dark:text-blue-400 hover:underline">
+                                    View
+                                </a>
                                 <a href="{{ route('dashboard.clients.edit', $client) }}"
                                    class="text-indigo-600 dark:text-indigo-400 hover:underline">
                                     Edit
