@@ -21,7 +21,7 @@
                     <!-- Full Name -->
                    
 <div>
-    <x-input-label for="name" :value="__('Full Name')" />
+    <x-input-label for="name" :value="__('Full Name')"  class="dark:text-gray-200"/>
     <x-text-input id="name"
                   name="name"
                   type="text"
@@ -35,7 +35,7 @@
 
 <!-- Email -->
 <div>
-    <x-input-label for="email" :value="__('Email')" />
+    <x-input-label for="email" :value="__('Email')" class="dark:text-gray-200" />
     <x-text-input id="email"
                   name="email"
                   type="email"
@@ -48,7 +48,7 @@
 
 <!-- Phone -->
 <div>
-    <x-input-label for="phone" :value="__('Phone')" />
+    <x-input-label for="phone" :value="__('Phone')" class="dark:text-gray-200"/>
     <x-text-input id="phone"
                   name="phone"
                   type="text"
@@ -65,7 +65,7 @@
 
                     <!-- Address -->
                     <div>
-                        <x-input-label for="address" :value="__('Address')" />
+                        <x-input-label for="address" :value="__('Address')" class="dark:text-gray-200" />
                         <textarea id="address"
                                   name="address"
                                   rows="3"
@@ -75,7 +75,7 @@
 
                     <!-- Notes -->
                     <div>
-                        <x-input-label for="notes" :value="__('Notes')" />
+                        <x-input-label for="notes" :value="__('Notes')" class="dark:text-gray-200" />
                         <textarea id="notes"
                                   name="notes"
                                   rows="4"

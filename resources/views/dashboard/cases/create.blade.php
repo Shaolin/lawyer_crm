@@ -21,7 +21,7 @@
 
                     <!-- Title -->
                     <div>
-                        <x-input-label for="title" :value="__('Title')" />
+                        <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200" />
                         <x-text-input id="title" class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 
                          dark:text-gray-100 dark:placeholder-gray-400" type="text" name="title" required />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -29,7 +29,7 @@
 
                     <!-- Client -->
                     <div class="mt-4">
-                        <x-input-label for="client_id" :value="__('Client')" />
+                        <x-input-label for="client_id" :value="__('Client')" class="dark:text-gray-200"/>
                         <select id="client_id" name="client_id" class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
                             @foreach($clients as $client)
                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
@@ -40,7 +40,7 @@
 
                     <!-- Status -->
                     <div class="mt-4">
-                        <x-input-label for="status" :value="__('Status')" />
+                        <x-input-label for="status" :value="__('Status')" class="dark:text-gray-200"/>
                         <select id="status" name="status" class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
                             <option value="open">Open</option>
                             <option value="in_progress">In Progress</option>
@@ -51,7 +51,7 @@
 
                     <!-- Description -->
                     <div class="mt-4">
-                        <x-input-label for="description" :value="__('Description')" />
+                        <x-input-label for="description" :value="__('Description')" class="dark:text-gray-200"/>
                         <textarea id="description" name="description" rows="4"
                                   class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"></textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />

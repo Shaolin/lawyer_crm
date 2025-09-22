@@ -104,11 +104,55 @@ class InvoiceController extends Controller
         return view('dashboard.invoices.edit', compact('invoice', 'clients'));
     }
     
+    
     public function update(Request $request, Invoice $invoice)
-    {
-        $this->authorize('update', $invoice);
-        // rest of your update logic...
+{
+    $this->authorize('update', $invoice);
+
+    // 1) Validate
+    $validated = $request->validate([
+        'client_id'           => 'required|exists:clients,id',
+        'issue_date'          => 'required|date',
+        'due_date'            => 'nullable|date|after_or_equal:issue_date',
+        'status'              => 'required|in:draft,sent,paid,overdue,cancelled',
+
+        'items'               => 'required|array|min:1',
+        'items.*.description' => 'required|string|max:255',
+        'items.*.quantity'    => 'required|integer|min:1',
+        'items.*.unit_price'  => 'required|numeric|min:0',
+    ]);
+
+    // 2) Recalculate total
+    $total = 0;
+    foreach ($validated['items'] as $it) {
+        $total += $it['quantity'] * $it['unit_price'];
     }
+
+    // 3) Update invoice
+    $invoice->update([
+        'client_id'     => $validated['client_id'],
+        'issue_date'    => $validated['issue_date'],
+        'due_date'      => $validated['due_date'] ?? null,
+        'status'        => $validated['status'],
+        'total_amount'  => $total,
+    ]);
+
+    // 4) Delete old items and replace with new
+    $invoice->items()->delete();
+    foreach ($validated['items'] as $it) {
+        $invoice->items()->create([
+            'description' => $it['description'],
+            'quantity'    => $it['quantity'],
+            'unit_price'  => $it['unit_price'],
+            'total'       => $it['quantity'] * $it['unit_price'],
+        ]);
+    }
+
+    return redirect()
+        ->route('dashboard.invoices.show', $invoice)
+        ->with('success', 'Invoice updated successfully.');
+}
+
     
     public function destroy(Invoice $invoice)
     {

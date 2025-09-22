@@ -21,7 +21,7 @@
 
                     <!-- Name -->
                     <div>
-                        <x-input-label for="name" :value="__('Name')" />
+                        <x-input-label for="name" :value="__('Name')" class="dark:text-gray-200"/>
                         <x-text-input id="name"
                                       class="block mt-1 w-full
                                       dark:bg-gray-700 dark:border-gray-600 
@@ -35,7 +35,7 @@
 
                     <!-- Email -->
                     <div>
-                        <x-input-label for="email" :value="__('Email')" />
+                        <x-input-label for="email" :value="__('Email')" class="dark:text-gray-200" />
                         <x-text-input id="email"
                                       class="block mt-1 w-full
                                       dark:bg-gray-700 dark:border-gray-600 
@@ -49,7 +49,7 @@
 
                     <!-- Phone -->
                     <div>
-                        <x-input-label for="phone" :value="__('Phone')" />
+                        <x-input-label for="phone" :value="__('Phone')" class="dark:text-gray-200"/>
                         <x-text-input id="phone"
                                       class="block mt-1 w-full
                                       dark:bg-gray-700 dark:border-gray-600 
@@ -62,7 +62,7 @@
 
                     <!-- Address -->
                     <div>
-                        <x-input-label for="address" :value="__('Address')" />
+                        <x-input-label for="address" :value="__('Address')" class="dark:text-gray-200" />
                         <textarea id="address"
                                   name="address"
                                   class="block mt-1 w-full rounded-md border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400">{{ old('address', $client->address) }}</textarea>

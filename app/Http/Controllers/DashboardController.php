@@ -20,6 +20,7 @@ class DashboardController extends Controller
         $pendingCases   = LegalCase::where('status', 'open')->count();
         $pendingInvoices= Invoice::where('status', 'unpaid')
                                 ->orWhere('status', 'overdue')
+                                ->orWhere('status', 'sent')
                                 ->count();
 
         return view('dashboard.index', compact(
