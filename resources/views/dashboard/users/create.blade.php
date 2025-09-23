@@ -1,12 +1,13 @@
 <x-app-layout>
+  
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-4">
-            {{ __('Create New User') }}
-        </h2>
-        <div>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
+                {{ __('Create New User') }}
+            </h2>
             <a href="{{ route('dashboard.users.index') }}"
-               class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200">
-               ← Back to Users
+               class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 dark:hover:bg-indigo-500">
+                ← Back to Users
             </a>
         </div>
     </x-slot>
