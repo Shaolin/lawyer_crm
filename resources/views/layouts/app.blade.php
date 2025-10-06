@@ -12,7 +12,13 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
+    @if (app()->environment('production'))
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BOrthtGJ.css') }}">
+    <script type="module" src="{{ asset('build/assets/app-Da_XqnL6.js') }}"></script>
+@else
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endif
+
 </head>
 <body class="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
     <div class="min-h-screen flex flex-col">
