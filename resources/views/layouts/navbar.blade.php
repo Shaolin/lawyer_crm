@@ -13,10 +13,11 @@
                class="{{ request()->routeIs('features') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
                Features
             </a>
-            <a href="{{ url('/#why') }}" 
-               class="text-gray-700 hover:text-indigo-700">
+            <a href="{{ route('whyus') }}" 
+               class="{{ request()->routeIs('whyus') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
                Why Us
             </a>
+            
             <a href="{{ route('contact.show') }}" 
                class="{{ request()->routeIs('contact.show') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
                Contact
@@ -72,7 +73,7 @@
            class="{{ request()->routeIs('features') ? 'text-indigo-700 font-semibold' : 'text-gray-700 hover:text-indigo-700' }}">
            Features
         </a>
-        <a href="{{ url('/#why') }}" 
+        <a href="{{ url('why') }}" 
            class="text-gray-700 hover:text-indigo-700">
            Why Us
         </a>
