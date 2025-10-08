@@ -47,7 +47,7 @@
     </div>
 
    <!-- Floating Button Container -->
-<div class="fixed bottom-4 left-0 w-full flex justify-between px-3 sm:px-6 gap-2 sm:gap-4 z-50" >
+<div class="fixed bottom-6 left-0 w-full flex justify-between px-6 z-50" >
     @auth
         <!-- Back to Home -->
         <a href="{{ url('/') }}"
