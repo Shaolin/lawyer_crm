@@ -399,33 +399,33 @@ class="fixed bottom-6 left-6 inline-flex items-center px-5 py-3 text-sm font-med
         @endif
 
         <!-- Page Content -->
-        <main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8">
+        <main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 pb-32 sm:pb-24">
             {{ $slot }}
         </main>
     </div>
 
    <!-- Floating Button Container -->
 <div class="fixed bottom-6 left-0 w-full flex justify-between px-6 z-50" >
-    @auth
-        <!-- Back to Home -->
-        <a href="{{ url('/') }}"
-           class="inline-flex items-center px-5 py-3 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-full shadow-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition
-                  dark:bg-gray-800 dark:text-gray-100 dark:border-indigo-400 dark:hover:bg-gray-700">
-             ⬅️ Back to Home
-        </a>
+     <!-- Floating Dashboard Button -->
+     @auth
+     <a href="{{ route('dashboard') }}"
+        class="fixed bottom-6 right-6 inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+          Dashboard
+     </a>
 
-        <!-- Centered Theme Toggle -->
-        <button id="theme-toggle"
-            class="inline-flex items-center justify-center px-4 py-3 text-sm font-medium rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-md transition">
-            🌞 / 🌙
-        </button>
+     <!-- Floating Welcome Button -->
+     <a href="{{ url('/') }}"
+        class="fixed bottom-6 left-6 inline-flex items-center px-5 py-3 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-full shadow-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition
+               dark:bg-gray-800 dark:text-gray-100 dark:border-indigo-400 dark:hover:bg-gray-700">
+          ⬅️ Back to Home
+     </a>
+ @endauth
 
-        <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
-           class="inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
-             Dashboard
-        </a>
-    @endauth
+ <!-- Dark/Light Mode Toggle Button -->
+ <button id="theme-toggle"
+     class="fixed bottom-20 right-6 px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-md transition">
+     🌞 / 🌙
+ </button>
 </div>
 
 
@@ -496,23 +496,3 @@ class="fixed bottom-6 left-6 inline-flex items-center px-5 py-3 text-sm font-med
 </html>
 
 
- <!-- Floating Dashboard Button -->
- @auth
-        <a href="{{ route('dashboard') }}"
-           class="fixed bottom-6 right-6 inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
-             Dashboard
-        </a>
-
-        <!-- Floating Welcome Button -->
-        <a href="{{ url('/') }}"
-           class="fixed bottom-6 left-6 inline-flex items-center px-5 py-3 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-full shadow-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition
-                  dark:bg-gray-800 dark:text-gray-100 dark:border-indigo-400 dark:hover:bg-gray-700">
-             ⬅️ Back to Home
-        </a>
-    @endauth
-
-    <!-- Dark/Light Mode Toggle Button -->
-    <button id="theme-toggle"
-        class="fixed bottom-20 right-6 px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-md transition">
-        🌞 / 🌙
-    </button>
