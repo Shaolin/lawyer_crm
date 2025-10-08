@@ -41,38 +41,34 @@
         @endif
 
         <!-- Page Content -->
-       
-        <!-- Page Content -->
-<main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 pb-40 sm:pb-28">
-    {{ $slot }}
-</main>
+        <main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 pb-40 sm:pb-28">
+            {{ $slot }}
+        </main>
+    </div>
 
-<!-- Floating Buttons -->
-<div id="floating-buttons"
-    class="fixed bottom-4 left-0 w-full flex flex-col sm:flex-row sm:justify-between items-center gap-3 sm:gap-4 px-4 sm:px-6 z-50">
+   <!-- Floating Button Container -->
+<div class="fixed bottom-6 left-0 w-full flex justify-between px-6 z-50" >
+     <!-- Floating Dashboard Button -->
+     @auth
+     <a href="{{ route('dashboard') }}"
+        class="fixed bottom-6 right-6 inline-flex items-center px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
+          Dashboard
+     </a>
 
-    @auth
-        <!-- Back to Home -->
-        <a href="{{ url('/') }}"
-           class="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-full shadow-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition
-                  dark:bg-gray-800 dark:text-gray-100 dark:border-indigo-400 dark:hover:bg-gray-700">
-            ⬅️ Back to Home
-        </a>
+     <!-- Floating Welcome Button -->
+     <a href="{{ url('/') }}"
+        class="fixed bottom-6 left-6 inline-flex items-center px-5 py-3 text-sm font-medium text-indigo-600 bg-white border border-indigo-600 rounded-full shadow-lg hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition
+               dark:bg-gray-800 dark:text-gray-100 dark:border-indigo-400 dark:hover:bg-gray-700">
+          ⬅️ Back to Home
+     </a>
+ @endauth
 
-        <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
-           class="inline-flex items-center justify-center w-full sm:w-auto px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
-            Dashboard
-        </a>
-    @endauth
-
-    <!-- Theme Toggle -->
-    <button id="theme-toggle"
-        class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-        🌞 / 🌙
-    </button>
+ <!-- Dark/Light Mode Toggle Button -->
+ <button id="theme-toggle"
+     class="fixed bottom-20 right-6 px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 shadow-md transition">
+     🌞 / 🌙
+ </button>
 </div>
-
 
 
     <!-- Global Styles for Forms, Buttons & Tables -->
@@ -138,25 +134,6 @@
             themeToggle.addEventListener("click", toggleTheme);
         }
     </script>
-
-    {{-- button movement --}}
-    <script>
-        const floatingButtons = document.getElementById("floating-buttons");
-        let initialBottom = parseInt(window.getComputedStyle(floatingButtons).bottom);
-    
-        window.visualViewport?.addEventListener("resize", () => {
-            const viewportHeight = window.visualViewport.height;
-            const windowHeight = window.innerHeight;
-    
-            // If keyboard is visible
-            if (viewportHeight < windowHeight - 100) {
-                floatingButtons.style.bottom = "260px"; // lift buttons above keyboard
-            } else {
-                floatingButtons.style.bottom = initialBottom + "px";
-            }
-        });
-    </script>
-    
 </body>
 </html>
 
