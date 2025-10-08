@@ -16,7 +16,6 @@
             <!-- Desktop Table -->
             <div class="hidden sm:block overflow-x-auto rounded-lg shadow">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <!-- Table Head -->
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
                             <th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-300">
@@ -33,8 +32,6 @@
                             </th>
                         </tr>
                     </thead>
-
-                    <!-- Table Body -->
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse($clients as $client)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
@@ -85,7 +82,7 @@
                             </form>
                         </div>
                     </div>
-                    <!-- Horizontal line to demarcate cards -->
+                    <!-- Horizontal line between cards -->
                     <hr class="border-gray-200 dark:border-gray-700">
                 @empty
                     <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
