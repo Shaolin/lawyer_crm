@@ -53,22 +53,7 @@
             <!-- Mobile Cards -->
             <div class="sm:hidden mt-4 space-y-4">
                 @forelse($clients as $client)
-                    <div class="bg-white dark:bg-gray-900 shadow rounded-lg p-4">
-                        <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $client->name }}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">Email: {{ $client->email }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-300">Phone: {{ $client->phone }}</p>
-                        <div class="flex flex-col space-y-1 mt-2">
-                            <a href="{{ route('dashboard.clients.show', $client) }}" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View</a>
-                            <a href="{{ route('dashboard.clients.edit', $client) }}" class="text-indigo-600 dark:text-indigo-400 hover:underline text-sm">Edit</a>
-                            <form action="{{ route('dashboard.clients.destroy', $client) }}" method="POST" onsubmit="return confirm('Delete this client?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 dark:text-red-400 hover:underline text-sm text-left">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Horizontal line between cards -->
-                    <hr class="border-gray-200 dark:border-gray-700">
+                    <x-mobile-card :model="$client" :fields="['name','email','phone']" route-prefix="dashboard.clients"/>
                 @empty
                     <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
                 @endforelse
