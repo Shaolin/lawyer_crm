@@ -41,7 +41,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 pb-24">
+        <main class="flex-1 max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 pb-32 sm:pb-24">
             {{ $slot }}
         </main>
     </div>
