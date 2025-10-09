@@ -14,7 +14,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Desktop Table -->
-            <div class="hidden sm:block">
+            <div class="block">
                 <x-table>
                     <x-slot name="head">
                         <tr>
