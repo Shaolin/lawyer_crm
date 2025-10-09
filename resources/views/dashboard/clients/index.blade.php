@@ -5,7 +5,7 @@
                 {{ __('Clients') }}
             </h2>
             <a href="{{ route('dashboard.clients.create') }}" class="btn-primary">
-                + Add Client
+                + Add Clients, ok!
             </a>
         </div>
     </x-slot>
