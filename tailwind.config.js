@@ -33,10 +33,15 @@ import forms from '@tailwindcss/forms'
 export default {
     darkMode: 'class',
     content: [
-        './resources/views/**/*.blade.php',
+        './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
+        './resources/**/*.jsx',
+        './resources/**/*.tsx',
+        './resources/**/*.ts',
+        './resources/**/*.html',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
     ],
     theme: {
         extend: {
@@ -47,3 +52,4 @@ export default {
     },
     plugins: [forms],
 }
+

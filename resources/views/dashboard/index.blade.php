@@ -128,7 +128,6 @@
 
         </div>
     </div>
-    <div class="block sm:hidden bg-red-500 text-white p-4 mt-4">MOBILE VIEW</div>
-<div class="hidden sm:block bg-green-500 text-white p-4 mt-4">DESKTOP VIEW</div>
+    
 
 </x-app-layout>

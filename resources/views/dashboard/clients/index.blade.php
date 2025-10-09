@@ -10,7 +10,7 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    
        <!-- Desktop Table -->
 <div class="hidden sm:block">
     <x-table>
