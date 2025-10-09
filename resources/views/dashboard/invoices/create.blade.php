@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between flex-wrap gap-2">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
                 {{ __('Create Invoice') }}
             </h2>
@@ -12,7 +12,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6">
                 <form action="{{ route('dashboard.invoices.store') }}" method="POST">
                     @csrf
@@ -53,46 +53,49 @@
                     <!-- Items -->
                     <div class="mt-6">
                         <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-100">Invoice Items</h3>
-                        <table class="min-w-full mt-2 border border-gray-200 dark:border-gray-600" id="items-table">
-                            <thead class="bg-gray-100 dark:bg-gray-700">
-                                <tr>
-                                    <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Description</th>
-                                    <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Qty</th>
-                                    <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Unit Price</th>
-                                    <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Total</th>
-                                    <th class="px-2 py-1 border dark:border-gray-600"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border px-2 py-1 dark:border-gray-600">
-                                        <input type="text" name="items[0][description]" 
-                                               class="w-full border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200" required>
-                                    </td>
-                                    <td class="border px-2 py-1 dark:border-gray-600">
-                                        <input type="number" name="items[0][quantity]" value="1" min="1"
-                                               class="w-20 border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200 qty" required>
-                                    </td>
-                                    <td class="border px-2 py-1 dark:border-gray-600">
-                                        <input type="number" step="0.01" name="items[0][unit_price]" value="0"
-                                               class="w-24 border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200 price" required>
-                                    </td>
-                                    <td class="border px-2 py-1 dark:border-gray-600 total text-gray-700 dark:text-gray-200">0.00</td>
-                                    <td class="border px-2 py-1 text-center dark:border-gray-600">
-                                        <button type="button" class="remove-row text-red-600 dark:text-red-400">✕</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="overflow-x-auto mt-2">
+                            <table class="min-w-full border border-gray-200 dark:border-gray-600" id="items-table">
+                                <thead class="bg-gray-100 dark:bg-gray-700">
+                                    <tr>
+                                        <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Description</th>
+                                        <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Qty</th>
+                                        <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Unit Price</th>
+                                        <th class="px-2 py-1 border dark:border-gray-600 text-gray-700 dark:text-gray-200">Total</th>
+                                        <th class="px-2 py-1 border dark:border-gray-600"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border px-2 py-1 dark:border-gray-600">
+                                            <input type="text" name="items[0][description]" 
+                                                   class="w-full border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200" required>
+                                        </td>
+                                        <td class="border px-2 py-1 dark:border-gray-600">
+                                            <input type="number" name="items[0][quantity]" value="1" min="1"
+                                                   class="w-20 border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200 qty" required>
+                                        </td>
+                                        <td class="border px-2 py-1 dark:border-gray-600">
+                                            <input type="number" step="0.01" name="items[0][unit_price]" value="0"
+                                                   class="w-24 border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-gray-200 price" required>
+                                        </td>
+                                        <td class="border px-2 py-1 dark:border-gray-600 total text-gray-700 dark:text-gray-200">0.00</td>
+                                        <td class="border px-2 py-1 text-center dark:border-gray-600">
+                                            <button type="button" class="remove-row text-red-600 dark:text-red-400">✕</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
                         <button type="button" id="add-row"
-                                class="mt-2 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 dark:hover:bg-green-500">
+                                class="mt-3 px-3 py-2 w-full sm:w-auto bg-green-600 text-white rounded hover:bg-green-700 dark:hover:bg-green-500">
                             + Add Item
                         </button>
                     </div>
 
                     <!-- Grand Total -->
-                    <div class="mt-6 text-right text-gray-800 dark:text-gray-100">
+                    <div class="mt-6 text-center sm:text-right text-gray-800 dark:text-gray-100">
                         <span class="font-semibold text-lg">Grand Total: ₦</span>
                         <span id="grand-total" class="font-bold text-lg">0.00</span>
                     </div>
@@ -111,9 +114,9 @@
                         <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
 
-                    <!-- Save Button -->
-                    <div class="mt-6">
-                        <x-primary-button>{{ __('Create Invoice') }}</x-primary-button>
+                    <!-- Sticky Save Button -->
+                    <div class="sticky bottom-0 bg-white dark:bg-gray-800 py-4 mt-8 border-t border-gray-200 dark:border-gray-700">
+                        <x-primary-button class="w-full sm:w-auto">{{ __('Create Invoice') }}</x-primary-button>
                     </div>
                 </form>
             </div>
