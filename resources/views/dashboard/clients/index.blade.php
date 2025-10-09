@@ -11,7 +11,16 @@
     </x-slot>
 
     
-       <!-- Desktop Table -->
+  <!--  Mobile version -->
+<div class="sm:hidden mt-4 space-y-4">
+    @forelse($clients as $client)
+        <x-mobile-card :model="$client" :fields="['name','email','phone']" route-prefix="dashboard.clients"/>
+    @empty
+        <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
+    @endforelse
+</div>
+
+<!--  Desktop version -->
 <div class="hidden sm:block">
     <x-table>
         <x-slot name="head">
@@ -48,14 +57,4 @@
     </x-table>
 </div>
 
-<!-- Mobile Cards -->
-<div class="sm:hidden mt-4 space-y-4">
-    @forelse($clients as $client)
-        <x-mobile-card :model="$client" :fields="['name','email','phone']" route-prefix="dashboard.clients"/>
-    @empty
-        <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
-    @endforelse
-</div>
-
-    </div>
 </x-app-layout>
