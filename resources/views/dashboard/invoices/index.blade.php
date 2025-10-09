@@ -19,36 +19,44 @@
                         No invoices found.
                     </div>
                 @else
+                    <!-- Responsive wrapper -->
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">#</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Client</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Issue Date</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Due Date</th>
+                                    <th class="hidden md:table-cell px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Issue Date</th>
+                                    <th class="hidden md:table-cell px-4 py-3 text-left text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Due Date</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Total</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Status</th>
+                                    <th class="hidden sm:table-cell px-4 py-3 text-center text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Status</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-gray-600 dark:text-gray-300 uppercase">Actions</th>
                                 </tr>
                             </thead>
+
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach($invoices as $invoice)
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                        <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">#{{ $invoice->invoice_number }}</td>
-                                        <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $invoice->client ? $invoice->client->name : 'N/A' }}
+                                        <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 font-medium">
+                                            #{{ $invoice->invoice_number }}
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                                            {{ $invoice->client->name ?? 'N/A' }}
+                                            <div class="md:hidden text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                                Issued: {{ $invoice->issue_date->format('Y-m-d') }}<br>
+                                                Due: {{ $invoice->due_date->format('Y-m-d') }}
+                                            </div>
+                                        </td>
+                                        <td class="hidden md:table-cell px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                                             {{ $invoice->issue_date->format('Y-m-d') }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+                                        <td class="hidden md:table-cell px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
                                             {{ $invoice->due_date->format('Y-m-d') }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 text-right">
+                                        <td class="px-4 py-3 text-sm text-right text-gray-700 dark:text-gray-300">
                                             ₦{{ number_format($invoice->total_amount, 2) }}
                                         </td>
-                                        <td class="px-4 py-3 text-center">
+                                        <td class="hidden sm:table-cell px-4 py-3 text-center">
                                             <span class="px-3 py-1 rounded-full text-xs font-medium
                                                 @if($invoice->status === 'paid') bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200
                                                 @elseif($invoice->status === 'overdue') bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200
@@ -57,7 +65,7 @@
                                                 {{ ucfirst($invoice->status) }}
                                             </span>
                                         </td>
-                                        <td class="px-4 py-3 text-center space-x-3">
+                                        <td class="px-4 py-3 text-center space-x-2 sm:space-x-3">
                                             <a href="{{ route('dashboard.invoices.show', $invoice) }}"
                                                class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View</a>
                                             <a href="{{ route('dashboard.invoices.edit', $invoice) }}"
