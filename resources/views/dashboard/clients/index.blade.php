@@ -13,8 +13,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Desktop Table -->
-            <div class="block">
+            <!-- ✅ Mobile Cards -->
+            <div class="block sm:hidden mt-4 space-y-4">
+                @forelse($clients as $client)
+                    <x-mobile-card :model="$client" :fields="['name','email','phone']" route-prefix="dashboard.clients"/>
+                @empty
+                    <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
+                @endforelse
+            </div>
+
+            <!-- ✅ Desktop Table -->
+            <div class="hidden sm:block">
                 <x-table>
                     <x-slot name="head">
                         <tr>
@@ -48,15 +57,6 @@
                         @endforelse
                     </x-slot>
                 </x-table>
-            </div>
-
-            <!-- Mobile Cards -->
-            <div class="sm:hidden mt-4 space-y-4">
-                @forelse($clients as $client)
-                    <x-mobile-card :model="$client" :fields="['name','email','phone']" route-prefix="dashboard.clients"/>
-                @empty
-                    <p class="text-center text-gray-500 dark:text-gray-400">No clients found.</p>
-                @endforelse
             </div>
 
         </div>
