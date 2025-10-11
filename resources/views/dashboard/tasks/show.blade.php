@@ -55,38 +55,21 @@
                         </p>
                     </div>
 
-                    
-                <!-- Task Type with Badge -->
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Task Type</h3>
-    <span class="@if($task->type === 'litigation') bg-red-100 text-red-800 dark:bg-red-600 dark:text-red-100 
-                 @else bg-blue-100 text-blue-800 dark:bg-blue-600 dark:text-blue-100 @endif
-                 px-3 py-1 rounded-full text-sm capitalize">
-        {{ str_replace('_', ' ', $task->type) }}
-    </span>
-</div>
+                    <!-- Task Type -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Task Type</h3>
+                        <p class="text-gray-700 dark:text-gray-300 capitalize">
+                            {{ str_replace('_', ' ', $task->type) }}
+                        </p>
+                    </div>
 
-<!-- Priority with Badge -->
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Priority</h3>
-    <span class="@if($task->priority === 'high') bg-red-100 text-red-800 dark:bg-red-600 dark:text-red-100
-                 @elseif($task->priority === 'medium') bg-yellow-100 text-yellow-800 dark:bg-yellow-600 dark:text-yellow-100
-                 @else bg-green-100 text-green-800 dark:bg-green-600 dark:text-green-100 @endif
-                 px-3 py-1 rounded-full text-sm capitalize">
-        {{ $task->priority }}
-    </span>
-</div>
-
-<!-- Status with Badge -->
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Status</h3>
-    <span class="@if($task->status === 'completed') bg-green-100 text-green-800 dark:bg-green-600 dark:text-green-100
-                 @elseif($task->status === 'pending') bg-yellow-100 text-yellow-800 dark:bg-yellow-600 dark:text-yellow-100
-                 @else bg-gray-100 text-gray-800 dark:bg-gray-600 dark:text-gray-100 @endif
-                 px-3 py-1 rounded-full text-sm capitalize">
-        {{ $task->status }}
-    </span>
-</div>
+                    <!-- Priority -->
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Priority</h3>
+                        <p class="text-gray-700 dark:text-gray-300 capitalize">
+                            {{ $task->priority }}
+                        </p>
+                    </div>
 
                     <!-- Due Date -->
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
@@ -96,15 +79,12 @@
                         </p>
                     </div>
 
-                    <!-- Status with Badge -->
+                    <!-- Status -->
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
                         <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Status</h3>
-                        <span class="@if($task->status === 'completed') bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100
-                                     @elseif($task->status === 'pending') bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100
-                                     @else bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100 @endif
-                                     px-3 py-1 rounded-full text-sm capitalize">
+                        <p class="text-gray-700 dark:text-gray-300 capitalize">
                             {{ $task->status }}
-                        </span>
+                        </p>
                     </div>
 
                     <!-- Actions -->
