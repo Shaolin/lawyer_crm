@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Invoice;
+use App\Models\Project;
 use App\Models\LegalCase;
 
 class DashboardController extends Controller
@@ -21,6 +22,11 @@ class DashboardController extends Controller
 
         $totalUsers = User::where('organization_id', $organizationId)->count();
 
+
+        $pendingProjects = Project::where('organization_id', $organizationId)
+        ->where('status', 'open')->count();
+
+
         $pendingCases = LegalCase::where('organization_id', $organizationId)
             ->where('status', 'open')
             ->count();
@@ -33,7 +39,8 @@ class DashboardController extends Controller
             'totalClients',
             'totalUsers',
             'pendingCases',
-            'pendingInvoices'
+            'pendingInvoices',
+            'pendingProjects'
         ));
     }
 }

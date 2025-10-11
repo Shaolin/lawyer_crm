@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\PaystackController;
@@ -43,6 +44,14 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
         Route::resource('users', UserManagementController::class)->names('dashboard.users');
     });
 });
+
+// projects
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {
+    Route::resource('projects', ProjectController::class)
+        ->names('dashboard.projects');
+});
+
+
 
 // clients
 Route::prefix('dashboard')->middleware(['auth'])->group(function () {

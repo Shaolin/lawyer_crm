@@ -2,13 +2,20 @@
     <x-slot name="header">
         <div x-data="{ open: false }" class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <!-- Page Title -->
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
-                {{ __('Dashboard Overview') }}
-            </h2>
+            <div>
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
+                    {{ __('Dashboard Overview') }}
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
+                    Welcome, {{ Auth::user()->name }} 
+                </p>
+            </div>
+            
 
             <!-- Desktop Nav -->
             <div class="hidden sm:flex flex-wrap gap-2">
                 <a href="{{ route('dashboard.clients.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
+                <a href="{{ route('dashboard.projects.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
                 <a href="{{ route('dashboard.cases.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
                 <a href="{{ route('dashboard.tasks.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
                 <a href="{{ route('dashboard.documents.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
@@ -63,6 +70,7 @@
                 </div>
 
                 <a href="{{ route('dashboard.clients.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
+                <a href="{{ route('dashboard.projects.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
                 <a href="{{ route('dashboard.cases.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
                 <a href="{{ route('dashboard.tasks.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
                 <a href="{{ route('dashboard.documents.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
@@ -101,6 +109,20 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8.962 8.962 0 0112 15c2.21 0 4.21.8 5.879 2.136M15 11a4 4 0 11-8 0 4 4 0 018 0zM19.07 4.93a10 10 0 11-14.14 0" />
                 </svg>
             </a>
+
+            <!-- Pending Projects -->
+<a href="{{ route('dashboard.projects.index') }}"
+class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
+ <div>
+     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Pending Projects</h3>
+     <p class="text-3xl font-bold text-purple-600 dark:text-purple-400 mt-2">{{ $pendingProjects }}</p>
+ </div>
+ <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+ </svg>
+</a>
+
 
             <!-- Pending Cases -->
             <a href="{{ route('dashboard.cases.index') }}"

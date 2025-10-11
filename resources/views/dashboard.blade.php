@@ -11,6 +11,11 @@
                    class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200">
                     Clients
                 </a>
+                <!-- Projects link -->
+                <a href="{{ route('dashboard.projects.index') }}"
+                   class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200">
+                    Projects
+                </a>
 
                 <!-- Cases link -->
                 <a href="{{ route('dashboard.cases.index') }}"
