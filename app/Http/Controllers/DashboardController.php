@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Project;
 use App\Models\LegalCase;
+use App\Models\Task;
 
 class DashboardController extends Controller
 {
@@ -22,10 +23,9 @@ class DashboardController extends Controller
 
         $totalUsers = User::where('organization_id', $organizationId)->count();
 
-
         $pendingProjects = Project::where('organization_id', $organizationId)
-        ->where('status', 'open')->count();
-
+            ->where('status', 'open')
+            ->count();
 
         $pendingCases = LegalCase::where('organization_id', $organizationId)
             ->where('status', 'open')
@@ -35,12 +35,18 @@ class DashboardController extends Controller
             ->whereIn('status', ['unpaid', 'overdue', 'sent'])
             ->count();
 
+        //  NEW: Pending Tasks (status = pending)
+        $pendingTasks = Task::where('organization_id', $organizationId)
+            ->where('status', 'pending')
+            ->count();
+
         return view('dashboard.index', compact(
             'totalClients',
             'totalUsers',
             'pendingCases',
             'pendingInvoices',
-            'pendingProjects'
+            'pendingProjects',
+            'pendingTasks'
         ));
     }
 }

@@ -21,16 +21,33 @@
                     <!-- Title -->
                     <div>
                         <x-input-label for="title" :value="__('Title')" class="dark:text-gray-200"/>
-                        <x-text-input id="title" class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 
-                         dark:text-gray-100 dark:placeholder-gray-400"
+                        <x-text-input id="title"
+                                      class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
                                       type="text" name="title"
                                       value="{{ old('title') }}" required />
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
                     </div>
 
+                    <!-- 🔹 Assigned Lawyer (Admins Only) -->
+                    @if(auth()->user()->role === 'admin')
+                        <div class="mt-4">
+                            <x-input-label for="assigned_to" :value="__('Assign to Lawyer')" class="dark:text-gray-200"/>
+                            <select id="assigned_to" name="assigned_to"
+                                    class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                                <option value="">-- Select Lawyer (or leave blank to assign yourself) --</option>
+                                @foreach($lawyers as $lawyer)
+                                    <option value="{{ $lawyer->id }}" {{ old('assigned_to') == $lawyer->id ? 'selected' : '' }}>
+                                        {{ $lawyer->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <x-input-error :messages="$errors->get('assigned_to')" class="mt-2" />
+                        </div>
+                    @endif
+
                     <!-- Related Case -->
                     <div class="mt-4">
-                        <x-input-label for="legal_case_id" :value="__('Related Case (optional)')"  class="dark:text-gray-200"/>
+                        <x-input-label for="legal_case_id" :value="__('Related Case (optional)')" class="dark:text-gray-200"/>
                         <select id="legal_case_id" name="legal_case_id"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
                             <option value="">-- None --</option>
@@ -43,15 +60,42 @@
                         <x-input-error :messages="$errors->get('legal_case_id')" class="mt-2" />
                     </div>
 
+                    <!-- Related Project -->
+                    <div class="mt-4">
+                        <x-input-label for="project_id" :value="__('Related Project (optional)')" class="dark:text-gray-200"/>
+                        <select id="project_id" name="project_id"
+                                class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                            <option value="">-- None --</option>
+                            @foreach($projects as $project)
+                                <option value="{{ $project->id }}" {{ old('project_id') == $project->id ? 'selected' : '' }}>
+                                    {{ $project->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('project_id')" class="mt-2" />
+                    </div>
+
                     <!-- Task Type -->
                     <div class="mt-4">
                         <x-input-label for="type" :value="__('Task Type')" class="dark:text-gray-200"/>
                         <select id="type" name="type"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
-                            <option value="general" {{ old('type') == 'general' ? 'selected' : '' }}>General Task</option>
-                            <option value="court_date" {{ old('type') == 'court_date' ? 'selected' : '' }}>Court Date</option>
+                            <option value="litigation" {{ old('type') == 'litigation' ? 'selected' : '' }}>Litigation</option>
+                            <option value="non_litigation" {{ old('type') == 'non_litigation' ? 'selected' : '' }}>Non-Litigation</option>
                         </select>
                         <x-input-error :messages="$errors->get('type')" class="mt-2" />
+                    </div>
+
+                    <!-- Task Priority -->
+                    <div class="mt-4">
+                        <x-input-label for="priority" :value="__('Priority')" class="dark:text-gray-200"/>
+                        <select id="priority" name="priority"
+                                class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200">
+                            <option value="high" {{ old('priority') == 'high' ? 'selected' : '' }}>High</option>
+                            <option value="medium" {{ old('priority', 'medium') == 'medium' ? 'selected' : '' }}>Medium</option>
+                            <option value="low" {{ old('priority') == 'low' ? 'selected' : '' }}>Low</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('priority')" class="mt-2" />
                     </div>
 
                     <!-- Status -->
@@ -69,8 +113,8 @@
                     <!-- Due Date -->
                     <div class="mt-4">
                         <x-input-label for="due_date" :value="__('Due Date')" class="dark:text-gray-200"/>
-                        <x-text-input id="due_date" class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 
-                         dark:text-gray-100 dark:placeholder-gray-400"
+                        <x-text-input id="due_date"
+                                      class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
                                       type="date" name="due_date"
                                       value="{{ old('due_date') }}" required />
                         <x-input-error :messages="$errors->get('due_date')" class="mt-2" />

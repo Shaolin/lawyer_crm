@@ -60,13 +60,15 @@
                 @endforelse
             </div>
 
-            {{-- 💻 Desktop Table View --}}
+            {{--  Desktop Table View --}}
             <div class="hidden sm:block bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg overflow-hidden mt-4">
                 <x-table>
                     <x-slot name="head">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Title</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Case</th>
+                            
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Case / Project</th>
+
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Assigned Lawyer</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Due Date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Status</th>
@@ -78,7 +80,17 @@
                         @forelse($tasks as $task)
                             <tr>
                                 <td class="px-6 py-4 text-sm font-medium">{{ $task->title }}</td>
-                                <td class="px-6 py-4 text-sm">{{ $task->legalCase->title ?? 'N/A' }}</td>
+                                
+                                <td class="px-6 py-4 text-sm">
+                                    @if($task->legalCase)
+                                        {{ $task->legalCase->title }}
+                                    @elseif($task->project)
+                                        {{ $task->project->title }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
+                                
                                 <td class="px-6 py-4 text-sm">{{ $task->user->name ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 text-sm">
                                     {{ $task->due_date ? $task->due_date->format('M d, Y') : 'N/A' }}

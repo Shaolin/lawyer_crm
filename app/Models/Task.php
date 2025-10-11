@@ -9,16 +9,24 @@ class Task extends Model
 {
     use HasFactory;
 
+    
+   
     protected $fillable = [
         'title',
         'description',
         'due_date',
         'status',
         'type',
+        'priority',
         'user_id',
         'legal_case_id',
+        'project_id',
         'organization_id',
     ];
+    
+   
+   
+    
 
     protected $casts = [
         'due_date' => 'datetime',
@@ -39,5 +47,10 @@ class Task extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+    
 }
 

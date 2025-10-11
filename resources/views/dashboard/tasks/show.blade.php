@@ -38,12 +38,34 @@
                     </p>
                 </div>
 
+                <!-- Related Project -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Related Project</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        {{ $task->project->title ?? 'N/A' }}
+                    </p>
+                </div>
+
                 <!-- Assigned Lawyer -->
                 <div>
                     <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Assigned Lawyer</h3>
                     <p class="text-gray-700 dark:text-gray-300">
                         {{ $task->user->name ?? 'N/A' }}
                     </p>
+                </div>
+
+                <!-- Task Type -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Task Type</h3>
+                    <p class="text-gray-700 dark:text-gray-300 capitalize">
+                        {{ str_replace('_', ' ', $task->type) }}
+                    </p>
+                </div>
+
+                <!-- Priority -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Priority</h3>
+                    <p class="text-gray-700 dark:text-gray-300 capitalize">{{ $task->priority }}</p>
                 </div>
 
                 <!-- Due Date -->

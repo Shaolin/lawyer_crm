@@ -135,6 +135,19 @@ class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transitio
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 21h6l-.75-4m-6 0h6m-6 0L6.5 6h11L15.75 17m-9.25 0h12" />
                 </svg>
             </a>
+            <!-- Pending Tasks -->
+<a href="{{ route('dashboard.tasks.index') }}"
+class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
+ <div>
+     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Pending Tasks</h3>
+     <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mt-2">{{ $pendingTasks }}</p>
+ </div>
+ <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+           d="M12 8v4l3 3m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+ </svg>
+</a>
+
 
             <!-- Pending Invoices -->
             <a href="{{ route('dashboard.invoices.index') }}"
