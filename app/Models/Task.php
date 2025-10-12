@@ -28,9 +28,13 @@ class Task extends Model
    
     
 
+    
+
     protected $casts = [
         'due_date' => 'datetime',
+        'last_notified_at' => 'datetime',
     ];
+    
 
     // Relationships
     public function user()
@@ -51,6 +55,34 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    // In Task model
+public function notificationFrequency()
+{
+    return match($this->priority) {
+        'high' => 2,    // 2 messages per day
+        'medium' => 1,  // 1 message per day
+        'low' => 0.14,  // ~1 message per week (1/7 per day)
+        default => 1,
+    };
+}
+
+// In Task.php
+public function shouldNotify(): bool
+{
+    if (!$this->last_notified_at) {
+        return true;
+    }
+
+    $frequencyPerDay = $this->notificationFrequency(); // 2/day, 1/day, 1/week
+
+    // Convert frequency per day to minimum hours between notifications
+    $hoursBetween = 24 / $frequencyPerDay;
+
+    return $this->last_notified_at->diffInHours(now()) >= $hoursBetween;
+}
+
+
     
 }
 
