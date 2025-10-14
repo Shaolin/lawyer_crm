@@ -34,6 +34,19 @@
                                           type="email" name="email" value="{{ old('email') }}" required />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
+                        <!-- Phone Number -->
+<div class="mt-4">
+    <x-input-label for="phone" :value="__('Phone Number')" class="dark:text-gray-200" />
+    <x-text-input id="phone" 
+                  class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                  type="text" 
+                  name="phone" 
+                  value="{{ old('phone') }}" 
+                  placeholder="+2348012345678"
+                  required />
+    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+</div>
+
 
                         <!-- Password -->
                         <div class="mt-4">

@@ -14,7 +14,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- 🌐 Mobile Card View --}}
+            {{--  Mobile Card View --}}
             <div class="sm:hidden space-y-4">
                 @forelse($tasks as $task)
                     <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-4 border border-gray-100 dark:border-gray-700">
@@ -58,6 +58,11 @@
                 @empty
                     <p class="text-center text-gray-500 dark:text-gray-400 mt-6">No tasks found.</p>
                 @endforelse
+
+                {{-- Mobile Pagination --}}
+                <div class="mt-4">
+                    {{ $tasks->links() }}
+                </div>
             </div>
 
             {{--  Desktop Table View --}}
@@ -66,9 +71,7 @@
                     <x-slot name="head">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Title</th>
-                            
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Case / Project</th>
-
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Assigned Lawyer</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Due Date</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Status</th>
@@ -80,7 +83,6 @@
                         @forelse($tasks as $task)
                             <tr>
                                 <td class="px-6 py-4 text-sm font-medium">{{ $task->title }}</td>
-                                
                                 <td class="px-6 py-4 text-sm">
                                     @if($task->legalCase)
                                         {{ $task->legalCase->title }}
@@ -90,7 +92,6 @@
                                         N/A
                                     @endif
                                 </td>
-                                
                                 <td class="px-6 py-4 text-sm">{{ $task->user->name ?? 'N/A' }}</td>
                                 <td class="px-6 py-4 text-sm">
                                     {{ $task->due_date ? $task->due_date->format('M d, Y') : 'N/A' }}
@@ -125,6 +126,11 @@
                         @endforelse
                     </x-slot>
                 </x-table>
+
+                {{-- Desktop Pagination --}}
+                <div class="mt-4 px-6 py-2">
+                    {{ $tasks->links() }}
+                </div>
             </div>
 
         </div>

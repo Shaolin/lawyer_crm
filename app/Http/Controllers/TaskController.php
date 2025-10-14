@@ -2,26 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Task;
-use App\Models\LegalCase;
-use App\Models\Project;
 use App\Models\User;
+use App\Models\Project;
+use App\Models\LegalCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\TaskAssignedSmsNotification;
 
 class TaskController extends Controller
 {
-    public function index()
-    {
-        $tasks = Auth::user()->role === 'admin'
-            ? Task::with(['legalCase', 'project', 'user'])->latest()->get()
-            : Task::with(['legalCase', 'project', 'user'])
-                ->where('user_id', Auth::id())
-                ->latest()
-                ->get();
+    // public function index()
+    // {
+    //     $tasks = Auth::user()->role === 'admin'
+    //         ? Task::with(['legalCase', 'project', 'user'])->latest()->get()
+    //         : Task::with(['legalCase', 'project', 'user'])
+    //             ->where('user_id', Auth::id())
+    //             ->latest()
+    //             ->get();
 
-        return view('dashboard.tasks.index', compact('tasks'));
-    }
+    //     return view('dashboard.tasks.index', compact('tasks'));
+    // }
+    public function index()
+{
+    $tasks = Auth::user()->role === 'admin'
+        ? Task::with(['legalCase', 'project', 'user'])->latest()->paginate(5) // 10 per page
+        : Task::with(['legalCase', 'project', 'user'])
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->paginate(5);
+
+    return view('dashboard.tasks.index', compact('tasks'));
+}
+
 
     public function create()
     {
@@ -52,14 +66,12 @@ class TaskController extends Controller
             'assigned_to'    => 'nullable|exists:users,id',
         ]);
 
-        // ✅ If admin assigns a lawyer → use that ID
-        // If admin leaves it empty → assign to himself
-        // If lawyer creates → assign to the logged-in lawyer
+        // ✅ Determine who to assign
         $assignedUserId = Auth::user()->role === 'admin'
             ? ($request->filled('assigned_to') ? $request->assigned_to : Auth::id())
             : Auth::id();
 
-        Task::create([
+        $task = Task::create([
             'title'           => $request->title,
             'description'     => $request->description,
             'due_date'        => $request->due_date,
@@ -72,7 +84,20 @@ class TaskController extends Controller
             'organization_id' => Auth::user()->organization_id ?? null,
         ]);
 
-        return redirect()->route('dashboard.tasks.index')->with('success', 'Task created successfully.');
+        
+        // after creating $task
+        // Log::info('Assigned user ID: ' . $assignedUserId);
+
+$assignedUser = User::find($assignedUserId);
+
+if ($assignedUser && $assignedUser->phone) {
+    $organization = $task->organization; // assuming relation exists
+    $assignedUser->notify(new \App\Notifications\TaskAssignedSmsNotification($task, $organization));
+}
+
+        return redirect()
+            ->route('dashboard.tasks.index')
+            ->with('success', 'Task created successfully' . ($assignedUser && $assignedUser->phone ? ' and SMS sent!' : '.'));
     }
 
     public function edit(Task $task)
@@ -110,19 +135,19 @@ class TaskController extends Controller
 
         $data = $request->except('assigned_to');
 
-        // ✅ Admin can reassign or take it himself
         if (Auth::user()->role === 'admin') {
             $data['user_id'] = $request->filled('assigned_to')
                 ? $request->assigned_to
                 : Auth::id();
         } else {
-            // Lawyer cannot change assignment
             $data['user_id'] = $task->user_id;
         }
 
         $task->update($data);
 
-        return redirect()->route('dashboard.tasks.index')->with('success', 'Task updated successfully.');
+        return redirect()
+            ->route('dashboard.tasks.index')
+            ->with('success', 'Task updated successfully.');
     }
 
     public function destroy(Task $task)
@@ -130,7 +155,9 @@ class TaskController extends Controller
         $this->authorize('delete', $task);
         $task->delete();
 
-        return redirect()->route('dashboard.tasks.index')->with('success', 'Task deleted successfully.');
+        return redirect()
+            ->route('dashboard.tasks.index')
+            ->with('success', 'Task deleted successfully.');
     }
 
     public function show(Task $task)

@@ -24,6 +24,9 @@
                         <p class="text-sm text-gray-600 dark:text-gray-300">
                             <span class="font-medium">Email:</span> {{ $user->email }}
                         </p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">
+                            <span class="font-medium">Phone:</span> {{ $user->phone ?? 'N/A' }}
+                        </p>
                         <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
                             <span class="font-medium">Role:</span> {{ ucfirst($user->role) }}
                         </p>
@@ -56,6 +59,7 @@
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Name</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Email</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase">Phone</th> {{-- ✅ New column --}}
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase">Role</th>
                             <th class="px-6 py-3 text-right text-xs font-medium uppercase">Actions</th>
                         </tr>
@@ -66,6 +70,7 @@
                             <tr>
                                 <td class="px-6 py-4 text-sm font-medium">{{ $user->name }}</td>
                                 <td class="px-6 py-4 text-sm">{{ $user->email }}</td>
+                                <td class="px-6 py-4 text-sm">{{ $user->phone ?? 'N/A' }}</td> {{-- ✅ Phone --}}
                                 <td class="px-6 py-4 text-sm capitalize">{{ $user->role }}</td>
                                 <td class="px-6 py-4 text-right text-sm flex items-center justify-end gap-3">
                                     <a href="{{ route('dashboard.users.edit', $user) }}"
@@ -85,7 +90,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">
                                     No users found.
                                 </td>
                             </tr>

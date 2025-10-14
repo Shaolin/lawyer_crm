@@ -9,8 +9,6 @@ class Task extends Model
 {
     use HasFactory;
 
-    
-   
     protected $fillable = [
         'title',
         'description',
@@ -22,19 +20,13 @@ class Task extends Model
         'legal_case_id',
         'project_id',
         'organization_id',
+        'last_notified_at',
     ];
-    
-   
-   
-    
-
-    
 
     protected $casts = [
         'due_date' => 'datetime',
         'last_notified_at' => 'datetime',
     ];
-    
 
     // Relationships
     public function user()
@@ -51,38 +43,32 @@ class Task extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
 
-    // In Task model
-public function notificationFrequency()
-{
-    return match($this->priority) {
-        'high' => 2,    // 2 messages per day
-        'medium' => 1,  // 1 message per day
-        'low' => 0.14,  // ~1 message per week (1/7 per day)
-        default => 1,
-    };
-}
-
-// In Task.php
-public function shouldNotify(): bool
-{
-    if (!$this->last_notified_at) {
-        return true;
+    // Interval in hours for notifications per priority
+    public function intervalPerPriority(): int
+    {
+        return match($this->priority) {
+            'high' => 6,     // 6 hours between SMS
+            'medium' => 24,  // 24 hours
+            'low' => 168,    // 1 week
+            default => 24,
+        };
     }
 
-    $frequencyPerDay = $this->notificationFrequency(); // 2/day, 1/day, 1/week
+    // Check if we should send a notification
+    public function shouldNotify(): bool
+    {
+        if (!$this->last_notified_at) {
+            return true; // never notified
+        }
 
-    // Convert frequency per day to minimum hours between notifications
-    $hoursBetween = 24 / $frequencyPerDay;
+        $hoursBetween = $this->intervalPerPriority();
 
-    return $this->last_notified_at->diffInHours(now()) >= $hoursBetween;
+        return $this->last_notified_at->diffInHours(now()) >= $hoursBetween;
+    }
 }
-
-
-    
-}
-

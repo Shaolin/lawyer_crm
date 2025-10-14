@@ -35,6 +35,20 @@
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
+                        <!-- Phone Number -->
+<div class="mt-4">
+    <x-input-label for="phone" :value="__('Phone Number')" class="dark:text-gray-200"/>
+    <x-text-input id="phone" 
+                  class="block mt-1 w-full dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                  type="text" 
+                  name="phone" 
+                  value="{{ old('phone', $user->phone) }}" 
+                  placeholder="+2348012345678" 
+                  required />
+    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+</div>
+
+
                         <!-- Password (optional update) -->
                         <div class="mt-4">
                             <x-input-label for="password" :value="__('Password (leave blank to keep current)')" class="dark:text-gray-200"/>
@@ -42,6 +56,7 @@
                                           type="password" name="password" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
+
 
                         <!-- Confirm Password -->
                         <div class="mt-4">
