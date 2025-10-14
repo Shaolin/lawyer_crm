@@ -27,11 +27,11 @@ class TaskController extends Controller
     public function index()
 {
     $tasks = Auth::user()->role === 'admin'
-        ? Task::with(['legalCase', 'project', 'user'])->latest()->paginate(5) // 10 per page
+        ? Task::with(['legalCase', 'project', 'user'])->latest()->paginate(6) // 10 per page
         : Task::with(['legalCase', 'project', 'user'])
             ->where('user_id', Auth::id())
             ->latest()
-            ->paginate(5);
+            ->paginate(6);
 
     return view('dashboard.tasks.index', compact('tasks'));
 }
