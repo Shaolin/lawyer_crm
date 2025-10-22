@@ -1,4 +1,4 @@
-can you push the "back to dashboard" button towards "back to home" button, let them be together, <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
