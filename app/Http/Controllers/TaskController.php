@@ -13,39 +13,34 @@ use App\Notifications\TaskAssignedSmsNotification;
 
 class TaskController extends Controller
 {
-    // public function index()
-    // {
-    //     $tasks = Auth::user()->role === 'admin'
-    //         ? Task::with(['legalCase', 'project', 'user'])->latest()->get()
-    //         : Task::with(['legalCase', 'project', 'user'])
-    //             ->where('user_id', Auth::id())
-    //             ->latest()
-    //             ->get();
-
-    //     return view('dashboard.tasks.index', compact('tasks'));
-    // }
     public function index()
-{
-    $tasks = Auth::user()->role === 'admin'
-        ? Task::with(['legalCase', 'project', 'user'])->latest()->paginate(6) // 10 per page
-        : Task::with(['legalCase', 'project', 'user'])
-            ->where('user_id', Auth::id())
+    {
+        $user = Auth::user();
+
+        $tasks = Task::with(['legalCase', 'project', 'user'])
+            ->where('organization_id', $user->organization_id)
+            ->when($user->role !== 'admin', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
             ->latest()
             ->paginate(6);
 
-    return view('dashboard.tasks.index', compact('tasks'));
-}
-
+        return view('dashboard.tasks.index', compact('tasks'));
+    }
 
     public function create()
     {
-        if (Auth::user()->role === 'admin') {
-            $cases = LegalCase::all();
-            $projects = Project::all();
-            $lawyers = User::where('role', 'lawyer')->get();
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $cases = LegalCase::where('organization_id', $user->organization_id)->get();
+            $projects = Project::where('organization_id', $user->organization_id)->get();
+            $lawyers = User::where('role', 'lawyer')
+                ->where('organization_id', $user->organization_id)
+                ->get();
         } else {
-            $cases = LegalCase::where('user_id', Auth::id())->get();
-            $projects = Project::where('user_id', Auth::id())->get();
+            $cases = LegalCase::where('user_id', $user->id)->get();
+            $projects = Project::where('user_id', $user->id)->get();
             $lawyers = collect();
         }
 
@@ -66,10 +61,12 @@ class TaskController extends Controller
             'assigned_to'    => 'nullable|exists:users,id',
         ]);
 
+        $user = Auth::user();
+
         // ✅ Determine who to assign
-        $assignedUserId = Auth::user()->role === 'admin'
-            ? ($request->filled('assigned_to') ? $request->assigned_to : Auth::id())
-            : Auth::id();
+        $assignedUserId = $user->role === 'admin'
+            ? ($request->filled('assigned_to') ? $request->assigned_to : $user->id)
+            : $user->id;
 
         $task = Task::create([
             'title'           => $request->title,
@@ -81,36 +78,45 @@ class TaskController extends Controller
             'user_id'         => $assignedUserId,
             'legal_case_id'   => $request->legal_case_id,
             'project_id'      => $request->project_id,
-            'organization_id' => Auth::user()->organization_id ?? null,
+            'organization_id' => $user->organization_id,
         ]);
 
-        
-        // after creating $task
-        // Log::info('Assigned user ID: ' . $assignedUserId);
+        // 🔔 Send SMS if assigned user has a phone
+        $assignedUser = User::find($assignedUserId);
 
-$assignedUser = User::find($assignedUserId);
-
-if ($assignedUser && $assignedUser->phone) {
-    $organization = $task->organization; // assuming relation exists
-    $assignedUser->notify(new \App\Notifications\TaskAssignedSmsNotification($task, $organization));
-}
+        if ($assignedUser && $assignedUser->phone) {
+            $organization = $task->organization ?? null;
+            $assignedUser->notify(new TaskAssignedSmsNotification($task, $organization));
+        }
 
         return redirect()
             ->route('dashboard.tasks.index')
             ->with('success', 'Task created successfully' . ($assignedUser && $assignedUser->phone ? ' and SMS sent!' : '.'));
     }
 
+    public function show(Task $task)
+    {
+        $this->authorizeAccess($task);
+
+        $task->load(['user', 'legalCase', 'project']);
+        return view('dashboard.tasks.show', compact('task'));
+    }
+
     public function edit(Task $task)
     {
-        $this->authorize('update', $task);
+        $this->authorizeAccess($task);
 
-        if (Auth::user()->role === 'admin') {
-            $cases = LegalCase::all();
-            $projects = Project::all();
-            $lawyers = User::where('role', 'lawyer')->get();
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            $cases = LegalCase::where('organization_id', $user->organization_id)->get();
+            $projects = Project::where('organization_id', $user->organization_id)->get();
+            $lawyers = User::where('role', 'lawyer')
+                ->where('organization_id', $user->organization_id)
+                ->get();
         } else {
-            $cases = LegalCase::where('user_id', Auth::id())->get();
-            $projects = Project::where('user_id', Auth::id())->get();
+            $cases = LegalCase::where('user_id', $user->id)->get();
+            $projects = Project::where('user_id', $user->id)->get();
             $lawyers = collect();
         }
 
@@ -119,7 +125,7 @@ if ($assignedUser && $assignedUser->phone) {
 
     public function update(Request $request, Task $task)
     {
-        $this->authorize('update', $task);
+        $this->authorizeAccess($task);
 
         $request->validate([
             'title'          => 'required|string|max:255',
@@ -133,14 +139,13 @@ if ($assignedUser && $assignedUser->phone) {
             'assigned_to'    => 'nullable|exists:users,id',
         ]);
 
+        $user = Auth::user();
         $data = $request->except('assigned_to');
 
-        if (Auth::user()->role === 'admin') {
+        if ($user->role === 'admin') {
             $data['user_id'] = $request->filled('assigned_to')
                 ? $request->assigned_to
-                : Auth::id();
-        } else {
-            $data['user_id'] = $task->user_id;
+                : $user->id;
         }
 
         $task->update($data);
@@ -152,7 +157,8 @@ if ($assignedUser && $assignedUser->phone) {
 
     public function destroy(Task $task)
     {
-        $this->authorize('delete', $task);
+        $this->authorizeAccess($task);
+
         $task->delete();
 
         return redirect()
@@ -160,9 +166,15 @@ if ($assignedUser && $assignedUser->phone) {
             ->with('success', 'Task deleted successfully.');
     }
 
-    public function show(Task $task)
+    /**
+     * Prevents cross-organization access
+     */
+    private function authorizeAccess(Task $task)
     {
-        $task->load(['user', 'legalCase', 'project']);
-        return view('dashboard.tasks.show', compact('task'));
+        $user = Auth::user();
+
+        if ($task->organization_id !== $user->organization_id) {
+            abort(403, 'Unauthorized access to this task.');
+        }
     }
 }
