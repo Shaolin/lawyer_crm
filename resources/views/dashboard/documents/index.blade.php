@@ -1,4 +1,21 @@
 <x-app-layout>
+
+    {{-- ✅ NEW: Search Bar Above Heading --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <form method="GET" action="{{ route('dashboard.documents.index') }}" class="flex items-center gap-2">
+            <input type="text"
+                   name="search"
+                   value="{{ request('search') }}"
+                   placeholder="Search documents, client, case, or uploader..."
+                   class="w-full px-4 py-2 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+            <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                Search
+            </button>
+        </form>
+    </div>
+
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
@@ -11,10 +28,10 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{--  Mobile Card View --}}
+            {{-- Mobile Card View --}}
             <div class="sm:hidden space-y-4">
                 @forelse($documents as $document)
                     <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-4 border border-gray-100 dark:border-gray-700">
@@ -63,9 +80,14 @@
                 @empty
                     <p class="text-center text-gray-500 dark:text-gray-400 mt-6">No documents found.</p>
                 @endforelse
+
+                {{-- ✅ Pagination for mobile --}}
+                <div class="mt-4">
+                    {{ $documents->links() }}
+                </div>
             </div>
 
-            {{--  Desktop Table View --}}
+            {{-- Desktop Table View --}}
             <div class="hidden sm:block bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-700">
@@ -120,6 +142,11 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                {{-- ✅ Pagination for desktop --}}
+                <div class="p-4">
+                    {{ $documents->links() }}
+                </div>
             </div>
 
         </div>

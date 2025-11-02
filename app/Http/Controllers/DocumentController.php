@@ -14,18 +14,50 @@ class DocumentController extends Controller
     /**
      * Display a listing of documents.
      */
-    public function index()
+    // public function index()
+    // {
+    //     $documents = Auth::user()->role === 'admin'
+    //         ? Document::with('client', 'legalCase', 'user')->latest()->get()
+    //         : Document::with('client', 'legalCase', 'user')
+    //             ->where('organization_id', Auth::user()->organization_id)
+    //             ->latest()
+    //             ->get();
+
+    //     return view('dashboard.documents.index', compact('documents'));
+    // }
+    public function index(Request $request)
     {
-        $documents = Auth::user()->role === 'admin'
-            ? Document::with('client', 'legalCase', 'user')->latest()->get()
-            : Document::with('client', 'legalCase', 'user')
-                ->where('organization_id', Auth::user()->organization_id)
-                ->latest()
-                ->get();
-
-        return view('dashboard.documents.index', compact('documents'));
+        $search = $request->input('search');
+    
+        // Base query with relationships
+        $query = Document::with(['client', 'legalCase', 'user']);
+    
+        // Restrict for non-admins
+        if (Auth::user()->role !== 'admin') {
+            $query->where('organization_id', Auth::user()->organization_id);
+        }
+    
+        // Advanced Search
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhereHas('client', function ($c) use ($search) {
+                      $c->where('name', 'like', "%{$search}%");
+                  })
+                  ->orWhereHas('legalCase', function ($case) use ($search) {
+                      $case->where('title', 'like', "%{$search}%");
+                  })
+                  ->orWhereHas('user', function ($u) use ($search) {
+                      $u->where('name', 'like', "%{$search}%");
+                  });
+            });
+        }
+    
+        $documents = $query->latest()->paginate(10)->withQueryString();
+    
+        return view('dashboard.documents.index', compact('documents', 'search'));
     }
-
+    
     /**
      * Show the form for creating a new document.
      */
