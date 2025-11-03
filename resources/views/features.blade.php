@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Features — Crystal CRM for Lawyers</title>
+    <title>Features — Law Office Pro for Lawyers</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -16,7 +16,7 @@
         <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center">
             <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Powerful Features for Law Firms</h1>
             <p class="mt-4 text-lg md:text-xl text-indigo-100 max-w-3xl mx-auto">
-                Crystal CRM gives you everything you need to manage your practice — clients, cases, documents,
+                Law Office Pro gives you everything you need to manage your practice — clients, cases, documents,
                 invoicing and team collaboration — built with lawyers in mind.
             </p>
             <div class="mt-8 flex justify-center gap-4">
@@ -24,7 +24,7 @@
                     Get Started
                 </a>
                 <a href="{{ route('whyus') }}" class="px-6 py-3 border border-white rounded-lg hover:bg-white/10">
-                    Why Crystal CRM
+                    Why Law Office Pro
                 </a>
             </div>
         </div>
@@ -80,10 +80,10 @@
         </div>
     </main>
 
-    <!-- Why Choose Crystal CRM -->
+    <!-- Why Choose Law Office Pro -->
     <section id="why" class="bg-gray-100 py-16">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Why Choose Crystal CRM for Lawyers?</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Why Choose Law Office Pro for Lawyers?</h2>
             <p class="text-lg text-gray-600 mb-12">
                 Built for legal professionals — focused on security, reliability and workflow efficiency.
             </p>

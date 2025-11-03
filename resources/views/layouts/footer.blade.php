@@ -3,7 +3,7 @@
         
         <!-- Logo & About -->
         <div>
-            <h3 class="text-white text-lg font-bold">Crystal CRM</h3>
+            <h3 class="text-white text-lg font-bold">Law Office Pro</h3>
             <p class="mt-2 text-sm">
                 A modern CRM built for law firms. Manage your cases, clients, tasks, and billing with ease and security.
             </p>
@@ -25,12 +25,12 @@
         <div>
             <h3 class="text-white text-lg font-bold">Contact</h3>
             <p class="mt-2 text-sm">📍 Enugu, Nigeria</p>
-            <p class="text-sm">📧 support@crystalcrm.com</p>
+            <p class="text-sm">📧 support@lawofficepro.com</p>
         </div>
     </div>
 
     <!-- Bottom Bar -->
     <div class="mt-8 border-t border-gray-700 pt-4 text-center text-sm text-gray-500">
-        © {{ date('Y') }} Crystal CRM. All rights reserved.
+        © {{ date('Y') }} Law Office Pro. All rights reserved.
     </div>
 </footer>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Why Us — Crystal CRM for Lawyers</title>
+    <title>Why Us — Law Office Pro for Lawyers</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -13,9 +13,9 @@
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-indigo-700 to-indigo-900 text-white py-20">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold">Why Choose Crystal CRM?</h1>
+            <h1 class="text-4xl md:text-5xl font-bold">Why Choose Law Office Pro?</h1>
             <p class="mt-4 text-lg md:text-xl text-gray-200">
-                Built for legal professionals, Crystal CRM streamlines your workflow so you can focus on winning cases.
+                Built for legal professionals, Law Office Pro streamlines your workflow so you can focus on winning cases.
             </p>
         </div>
     </section>
@@ -77,7 +77,7 @@
                     <div class="text-indigo-600 text-1xl mb-4">🚀</div>
                     <h3 class="text-xl font-semibold text-gray-800">Scalable for Growth</h3>
                     <p class="text-gray-600 mt-2">
-                        Whether you’re solo or a growing firm, Crystal CRM grows with you seamlessly.
+                        Whether you’re solo or a growing firm, Law Office Pro grows with you seamlessly.
                     </p>
                 </div>
             </div>

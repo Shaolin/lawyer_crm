@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crystal CRM for Lawyers</title>
+    <title>Law Office Pro for Lawyers</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -13,7 +13,7 @@
     <section class="relative bg-gradient-to-r from-indigo-900 to-purple-800 text-white w-full min-h-[60vh] flex flex-col items-center justify-center text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
         <p class="text-lg md:text-xl max-w-2xl">
-            Have questions about Crystal CRM? Fill out the form and we’ll get back to you as soon as possible.
+            Have questions about Law Office Pro? Fill out the form and we’ll get back to you as soon as possible.
         </p>
     </section>
 

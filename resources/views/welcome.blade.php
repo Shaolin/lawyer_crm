@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crystal CRM for Lawyers</title>
+    <title>Law Office Pro</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -14,7 +14,7 @@
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-r from-indigo-900 to-purple-800 text-white">
         <div class="max-w-7xl mx-auto px-6 py-24 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crystal CRM — Built for Law Firms</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Law Office Pro — Built for Law Firms</h1>
             <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
                 Manage cases, clients, documents, billing, and court schedules — all in one secure platform designed for legal professionals.
             </p>
@@ -66,9 +66,9 @@
     <!-- Why Choose Section -->
     <section class="bg-gray-100 py-16">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Why Choose Crystal CRM for Lawyers?</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Why Choose Law Office Pro for Lawyers?</h2>
             <p class="text-lg text-gray-600 mb-12">
-                We designed Crystal CRM with law firms in mind — helping you stay organized, save time, and grow your practice.
+                We designed Law Office Pro with law firms in mind — helping you stay organized, save time, and grow your practice.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <div class="flex items-start">

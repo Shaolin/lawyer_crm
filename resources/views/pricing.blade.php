@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pricing – Crystal CRM for Lawyers</title>
+    <title>Pricing – Law Office Pro for Lawyers</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased">
@@ -16,7 +16,7 @@
         <div class="max-w-7xl mx-auto px-6 py-24 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Flexible Pricing for Law Firms</h1>
             <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-                Whether you’re a solo lawyer or managing a mid-sized chamber, Crystal CRM has a plan that fits your needs and budget.
+                Whether you’re a solo lawyer or managing a mid-sized chamber, Law Office Pro has a plan that fits your needs and budget.
             </p>
         </div>
     </section>

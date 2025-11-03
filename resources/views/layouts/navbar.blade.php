@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white shadow fixed w-full top-0 z-50">
    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
        <!-- Logo -->
-       <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-700">Crystal CRM</a>
+       <a href="{{ url('/') }}" class="text-xl font-bold text-indigo-700">Law Office Pro</a>
 
        <!-- Desktop Menu -->
        <div class="hidden md:flex space-x-6">
