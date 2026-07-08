@@ -1,28 +1,38 @@
-<x-app-layout>
-    <x-slot name="header">
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\AppLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('header', null, []); ?> 
         <div x-data="{ open: false }" class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <!-- Page Title -->
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
-                    {{ __('Dashboard Overview') }}
+                    <?php echo e(__('Dashboard Overview')); ?>
+
                 </h2>
                 <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">
-                    Welcome, {{ Auth::user()->name }} 
+                    Welcome, <?php echo e(Auth::user()->name); ?> 
                 </p>
             </div>
             
 
             <!-- Desktop Nav -->
             <div class="hidden sm:flex flex-wrap gap-2">
-                <a href="{{ route('dashboard.clients.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
-                <a href="{{ route('dashboard.projects.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
-                <a href="{{ route('dashboard.cases.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
-                <a href="{{ route('dashboard.tasks.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
-                <a href="{{ route('dashboard.documents.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
-                <a href="{{ route('dashboard.invoices.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Invoices</a>
-                @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('dashboard.users.index') }}" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Users</a>
-                @endif
+                <a href="<?php echo e(route('dashboard.clients.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
+                <a href="<?php echo e(route('dashboard.projects.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
+                <a href="<?php echo e(route('dashboard.cases.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
+                <a href="<?php echo e(route('dashboard.tasks.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
+                <a href="<?php echo e(route('dashboard.documents.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
+                <a href="<?php echo e(route('dashboard.invoices.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Invoices</a>
+                <?php if(Auth::user()->role === 'admin'): ?>
+                    <a href="<?php echo e(route('dashboard.users.index')); ?>" class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100">Users</a>
+                <?php endif; ?>
             </div>
 
             <!-- Mobile Hamburger -->
@@ -69,29 +79,29 @@
                     </button>
                 </div>
 
-                <a href="{{ route('dashboard.clients.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
-                <a href="{{ route('dashboard.projects.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
-                <a href="{{ route('dashboard.cases.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
-                <a href="{{ route('dashboard.tasks.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
-                <a href="{{ route('dashboard.documents.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
-                <a href="{{ route('dashboard.invoices.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Invoices</a>
-                @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('dashboard.users.index') }}" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Users</a>
-                @endif
+                <a href="<?php echo e(route('dashboard.clients.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Clients</a>
+                <a href="<?php echo e(route('dashboard.projects.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Projects</a>
+                <a href="<?php echo e(route('dashboard.cases.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Cases</a>
+                <a href="<?php echo e(route('dashboard.tasks.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Tasks</a>
+                <a href="<?php echo e(route('dashboard.documents.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Documents</a>
+                <a href="<?php echo e(route('dashboard.invoices.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Invoices</a>
+                <?php if(Auth::user()->role === 'admin'): ?>
+                    <a href="<?php echo e(route('dashboard.users.index')); ?>" class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-100">Users</a>
+                <?php endif; ?>
             </aside>
         </div>
-    </x-slot>
+     <?php $__env->endSlot(); ?>
 
     <!-- Stats Section -->
     <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             <!-- Clients -->
-            <a href="{{ route('dashboard.clients.index') }}"
+            <a href="<?php echo e(route('dashboard.clients.index')); ?>"
                class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
                 <div>
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Clients</h3>
-                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">{{ $totalClients }}</p>
+                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2"><?php echo e($totalClients); ?></p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M15 11a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -99,11 +109,11 @@
             </a>
 
             <!-- Users -->
-            <a href="{{ route('dashboard.users.index') }}"
+            <a href="<?php echo e(route('dashboard.users.index')); ?>"
                class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
                 <div>
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Users</h3>
-                    <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $totalUsers }}</p>
+                    <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2"><?php echo e($totalUsers); ?></p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A8.962 8.962 0 0112 15c2.21 0 4.21.8 5.879 2.136M15 11a4 4 0 11-8 0 4 4 0 018 0zM19.07 4.93a10 10 0 11-14.14 0" />
@@ -111,11 +121,11 @@
             </a>
 
             <!-- Pending Projects -->
-<a href="{{ route('dashboard.projects.index') }}"
+<a href="<?php echo e(route('dashboard.projects.index')); ?>"
 class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
  <div>
      <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Unfinished Projects</h3>
-     <p class="text-3xl font-bold text-purple-600 dark:text-purple-400 mt-2">{{ $pendingProjects }}</p>
+     <p class="text-3xl font-bold text-purple-600 dark:text-purple-400 mt-2"><?php echo e($pendingProjects); ?></p>
  </div>
  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,22 +135,22 @@ class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transitio
 
 
             <!-- Pending Cases -->
-            <a href="{{ route('dashboard.cases.index') }}"
+            <a href="<?php echo e(route('dashboard.cases.index')); ?>"
                class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
                 <div>
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Pending Cases</h3>
-                    <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">{{ $pendingCases }}</p>
+                    <p class="text-3xl font-bold text-red-600 dark:text-red-400 mt-2"><?php echo e($pendingCases); ?></p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 21h6l-.75-4m-6 0h6m-6 0L6.5 6h11L15.75 17m-9.25 0h12" />
                 </svg>
             </a>
             <!-- Pending Tasks -->
-<a href="{{ route('dashboard.tasks.index') }}"
+<a href="<?php echo e(route('dashboard.tasks.index')); ?>"
 class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
  <div>
      <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Pending Tasks</h3>
-     <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mt-2">{{ $pendingTasks }}</p>
+     <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mt-2"><?php echo e($pendingTasks); ?></p>
  </div>
  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -150,11 +160,11 @@ class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transitio
 
 
             <!-- Pending Invoices -->
-            <a href="{{ route('dashboard.invoices.index') }}"
+            <a href="<?php echo e(route('dashboard.invoices.index')); ?>"
                class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transition flex items-center justify-between w-full">
                 <div>
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">Pending Invoices</h3>
-                    <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2">{{ $pendingInvoices }}</p>
+                    <p class="text-3xl font-bold text-yellow-600 dark:text-yellow-400 mt-2"><?php echo e($pendingInvoices); ?></p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h6v6m2 4H7a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v10a2 2 0 01-2 2z" />
@@ -165,4 +175,14 @@ class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 hover:shadow-lg transitio
     </div>
     
 
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH C:\laragon\www\lawyer_crm\resources\views/dashboard/index.blade.php ENDPATH**/ ?>
